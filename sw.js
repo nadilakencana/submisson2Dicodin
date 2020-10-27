@@ -22,7 +22,8 @@ var urlsToCache = [
     "/js/api.js",
     "/js/helper.js",
     "/manifest.json",
-    "/main.js"
+    "/main.js",
+    "/push.js"
 
 
 ];
@@ -38,8 +39,7 @@ self.addEventListener("install", function(event) {
   );
 });
 self.addEventListener("fetch", function(event) {
-  var base_url = "https://readerapi.codepolitan.com/";
-
+  var base_url = "https://api.football-data.org/v2/";
   if (event.request.url.indexOf(base_url) > -1) {
     event.respondWith(
       caches.open(CACHE_NAME).then(function(cache) {
@@ -57,18 +57,23 @@ self.addEventListener("fetch", function(event) {
     )
   }
 });
-
-self.addEventListener("activate", function(event) {
+self.addEventListener('push', function (event) {
+  var body;
+  if (event.data) {
+    body = event.data.text();
+  } else {
+    body = 'Push message no payload';
+  }
+  var options = {
+    body: body,
+    icon: 'img/icon-192.png',
+    vibrate: [100, 50, 100],
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: 1
+    }
+  };
   event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if (cacheName != CACHE_NAME) {
-            console.log("ServiceWorker: cache " + cacheName + " dihapus");
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
+    self.registration.showNotification('Push Notification', options)
   );
 });

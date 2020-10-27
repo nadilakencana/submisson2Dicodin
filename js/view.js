@@ -33,13 +33,13 @@ const showStanding = (dataStanding) => {
         </div>
         <ul id="keterangan-warna">
             <li>
-                <span class='hide-on-small-only box-keterangan light-blue darken-4'></span> <h6 class='hide-on-small-only'>Champions &nbsp;</h6> 
+                <span class='hide-on-small-only box-keterangan lime darken-4'></span> <h6 class='hide-on-small-only'>Champions &nbsp;</h6> 
             </li>
             <li>
-                <span class='hide-on-small-only box-keterangan orange accent-3'></span> <h6 class='hide-on-small-only'>Europa League &nbsp</h6>
+                <span class='hide-on-small-only box-keterangan  light-green darken-4'></span> <h6 class='hide-on-small-only'>Europa League &nbsp</h6>
             </li>
             <li>
-                <span class='hide-on-small-only box-keterangan red accent-2'></span> <h6 class='hide-on-small-only'>Degradasi</h6>
+                <span class='hide-on-small-only box-keterangan red darken-4'></span> <h6 class='hide-on-small-only'>Degradasi</h6>
             <li>
         </ul>
         <div class="card" style="padding-left: 24px; padding-right: 24px; margin-top: 30px;">
@@ -186,22 +186,21 @@ const showDetailTeam = (detail) => {
 
     helper.hideLoader();
 }
-
 const displayFavTeam = () => {
     const teams = db.displayAllTeam();
     let htmlTim = ``;
     teams.then(team => {
         if (team.length === 0) {
-            muatSini.innerHTML = `<h5>Anda Belum Menyimpan tim Favorit</h5>`;
-            return;
-        } else {
-            team.forEach(tim => {
-                // console.log(tim);
-                htmlTim += `
+                muatSini.innerHTML = `<h5>Anda Belum Menyimpan Pertandingan Favorit</h5>`;
+                return;
+            } else {
+                team.forEach(tim => {
+                    // console.log(tim);
+                    htmlTim += `
                 <div class="col s12 m6 card-favorite">
                     <div class="card">
                         <div class="card-image center">
-                        <img src="${tim.crestUrl}" alt="logo Club">
+                        <img src="${tim.crestUrl.replace(/^http:\/\//i, 'https://')}" alt="logo Club">
                         </div>
                         <div class="card-content">
                         <h6 class="center">${tim.name}</h6>
@@ -213,32 +212,32 @@ const displayFavTeam = () => {
                     </div>
                 </div>
                 `;
-            })
+                });
 
-            muatSini.innerHTML = htmlTim;
-            const btnDelete = document.querySelectorAll('.btn-delete-team');
-            const btnDetail = document.querySelectorAll('.btn-detail-team');
+                muatSini.innerHTML = htmlTim;
+                const btnDelete = document.querySelectorAll('.btn-delete-team');
+                const btnDetail = document.querySelectorAll('.btn-detail-team');
 
-            btnDelete.forEach(club => {
-                club.addEventListener('click', e => {
-                    const idClub = e.target.getAttribute('data-idteam');
-                    // console.log(idClub);
-                    db.deleteTeam(idClub);
-                })
-            })
-            btnDetail.forEach(club => {
-                club.addEventListener('click', e => {
-                    const idClub = e.target.getAttribute('data-idteam');
-                    // console.log(idClub);
-                    db.displayTeamByID(idClub);
-                })
-            })
-        }
+                btnDelete.forEach(club => {
+                    club.addEventListener('click', e => {
+                        const idClub = e.target.getAttribute('data-idteam');
+                        // console.log(idClub);
+                        db.deleteTeam(idClub);
+                    });
+                });
+                btnDetail.forEach(club => {
+                    club.addEventListener('click', e => {
+                        const idClub = e.target.getAttribute('data-idteam');
+                        // console.log(idClub);
+                        db.displayTeamByID(idClub);
+                    });
+                });
+            }
 
-    })
+        });
 
-    helper.hideLoader();
-}
+        helper.hideLoader();
+    }
 // display Team dari indexdb
 const showTeambyID = (detailTeam) => {
     
@@ -251,7 +250,7 @@ const showTeambyID = (detailTeam) => {
     <div id="detail-tim" class="col s12">
         <div class="header-team">
             <a class="btn-delete-team waves-effect waves-light red btn" data-idteam="${detailTeam.id}">Hapus dari Favorit</a>
-            <img src="${detailTeam.crestUrl || './img/empty_badge.svg'}" alt="Logo Club">
+            <img src="${detailTeam.crestUrl.replace(/^http:\/\//i, 'https://') || './img/empty_badge.svg'}" alt="Logo Club">
         </div>
         <table class="responsive-table">
             <tbody>

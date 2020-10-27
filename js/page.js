@@ -1,10 +1,11 @@
-import api from './js/api.js';
-import view from './js/view.js';
-import matchview from './js/matchview.js';
+import api from '/js/api.js';
+import view from '/js/view.js';
+import matchview from '/js/matchview.js';
 
 
-const loadPage = (page) => {
-    if (page === "") page === 'home';
+function loadPage(page) {
+    if (page === "")
+        page === 'home';
     if (page === 'home') {
         api.getKlasmen();
         return;
@@ -20,7 +21,7 @@ const loadPage = (page) => {
     if (page === 'favmatch') {
         matchview.displayFavMatch();
         return;
-    }else {
+    } else {
         errorPage();
     }
 
