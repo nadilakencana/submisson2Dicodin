@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liga FootBall</title>
+    <meta name="description" content="Liga FootBall" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/materialize.min.css">
+  <link rel="manifest" href="/manifest.json">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta name="theme-color" content="#1565C0" />
+
+</head>
+<body>
+    <nav class="black" role="navigation">
+        <div class="nav-wrapper container">
+          <a href="#" class="brand-logo" id="logo-container"><img src="/img/icon-192.png" alt="logo" style="width: 25px;">Liga FootBall</a>
+          <a href="#" class="sidenav-trigger" data-target="nav-mobile">☰</a>
+          <ul class="topnav right hide-on-med-and-down"></ul>
+          <ul class="sidenav" id="nav-mobile"></ul>
+        </div>
+      </nav>
+    
+      
+      
+      <div class="container" id="body-content">
+        <div class="row">
+          <div class="center-align" id="loader"></div>
+          <div class="col s12 m12" id="main-content">
+          </div>
+        </div>
+      </div>
+      <!-- End Container -->
+  
+      <!-- Flaoting Button -->
+      <div id="isi-footer"></div>
+  
+      <!-- Modal Structure -->
+      <div id="modal1" class="modal modal-fixed-footer">
+        <div id="isi-modal" class="modal-content"></div>
+        <div class="modal-footer">
+          <a href="#" class="modal-close waves-effect waves-green btn-flat">Tutup</a>
+        </div>
+      </div>
+      <script src="./js/materialize.min.js"></script>
+      <script src="./js/nav.js"></script>
+      <script src="./js/idb.js"></script>
+      <script src="./js/reg-sw.js"></script>
+      <script type="module" src="main.js"></script>
+</body>
+</html>
